@@ -132,9 +132,10 @@ module GoogleMapsService::Apis
     # @return[Hash] Hash with the following keys:
     #     result: dict containing place details
     #     html_attributions: set of attributions which must be displayed
-    def place(place_id, language: nil)
+    def place(place_id, language: nil, fields: nil)
       params = { placeid: place_id }
       params[:language] = language if language
+      params[:fields] = fields.is_a?(Array) ? fields.join(',') : fields if fields
       return get('/maps/api/place/details/json', params)
     end
 
